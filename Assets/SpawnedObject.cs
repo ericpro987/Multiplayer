@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpawnedObject : NetworkBehaviour
 {
-    private NetworkVariable<Color> _color = new NetworkVariable<Color>();
+    private NetworkVariable<Color32> _color = new NetworkVariable<Color32>();
     private SpriteRenderer _sprite;
 
     private void Awake()
@@ -14,30 +14,31 @@ public class SpawnedObject : NetworkBehaviour
         _color.OnValueChanged += OnColorCanviat;
     }
 
-    private void OnColorCanviat(Color previousValue, Color newValue)
+    private void OnColorCanviat(Color32 previousValue, Color32 newValue)
     {
-        _sprite.color = newValue;
+        Debug.Log("COLOR UPDATED");
+        ApplyColor(newValue);
+    }
+
+    private void ApplyColor(Color32 color)
+    {
+        _sprite.color = color;
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        //quan iniciem, no es cridar el value changed, ja vindr donat
-        _sprite.color = _color.Value;
+        Debug.Log("OnNetworkSpawn color: " + _color.Value);
+
+        ApplyColor(_color.Value);
     }
 
-    public void ColorAleatori(Color color)
+    public void SetColor(Color color)
     {
-        if (IsOwner)
-        {
-            CanviarColorRpc(color);
-        }
+        Debug.Log("SET COLOR SERVER: " + color);
+        _color.Value = (Color32)color;
     }
 
-    [Rpc(SendTo.Server)]
-    private void CanviarColorRpc(Color color)
-    {
-        _color.Value = color;
-    }
+
 }
 

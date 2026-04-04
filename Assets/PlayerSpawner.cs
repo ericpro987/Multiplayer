@@ -35,12 +35,16 @@ public class PlayerSpawner : NetworkBehaviour
     private void SpawnObjectRPC()
     {
         GameObject go = Instantiate(_spawnObject);
-
+        Color color = new Color(Random.value, Random.value, Random.value);
         go.transform.position = new Vector2(Random.Range(-8f, 8f), Random.Range(-5f, 5f));
 
         //aquesta llista s local i noms l'usa el servidor
         //a la resta de llocs est buida
         _spawnedObjects.Add(go);
+
+        
+
+      
 
         //Qualsevol d'aquestes dues fa que aparegui a tots els clients.
         //D'altra banda, s una instanciaci local.
@@ -50,14 +54,17 @@ public class PlayerSpawner : NetworkBehaviour
         //networkObject.SpawnAsPlayerObject(OwnerClientId);
         networkObject.Spawn();
 
+        // després DEL SPAWN BRO
+        go.GetComponent<SpawnedObject>().SetColor(color);
+
         //Avisem a tots els clients, no s pas necessari, per
         //hem de fer algun exemple de RPC de servidor a clients
         AvisarClientsRPC(OwnerClientId, networkObject.NetworkObjectId);
 
-        //Canviem el color de tots els nostres spawns, noms els nostres
+       /* //Canviem el color de tots els nostres spawns, noms els nostres
         Color color = new Color(Random.Range(-0f, 1f), UnityEngine.Random.Range(-0f, 1f), Random.Range(-0f, 1f));
         foreach (GameObject spawned in _spawnedObjects)
-            spawned.GetComponent<SpawnedObject>().ColorAleatori(color);
+            spawned.GetComponent<SpawnedObject>().ColorAleatori(color);*/
     }
 
     [Rpc(SendTo.ClientsAndHost)]

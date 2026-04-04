@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8090229856345724238}
   - component: {fileID: 1293208650031118945}
   - component: {fileID: 5914015032854469883}
+  - component: {fileID: -4162447155150892890}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -282,3 +283,18 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
+--- !u!114 &-4162447155150892890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590650565268881185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8885384574a7b948868cb91c21224c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _spawnActionRef: {fileID: 0}
+  _spawnObject: {fileID: 3590650565268881185, guid: a3e9692a9903c494aa78db6a7e47a81e, type: 3}
